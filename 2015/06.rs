@@ -24,10 +24,6 @@ struct Control {
   y_end: usize,
 }
 
-fn print_type_of<T>(_: &T) {
-  println!("{}", std::any::type_name::<T>())
-}
-
 fn parse_control_string(control_string_parts: &[&str]) -> Option<Control> {
   match control_string_parts.len() {
     4 => {
