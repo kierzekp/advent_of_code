@@ -291,21 +291,45 @@ fn get_active_wires(wires: &HashMap<String, Wire>) -> HashSet<String> {
 }
 
 fn main() {
-  let file_path = "inputs/07_input.txt";
-  let file_contents = fs::read_to_string(file_path).expect("Should read file");
-
-  let mut wires: HashMap<String, Wire> = HashMap::new();
-  let mut gates: Vec<Gate> = Vec::new();
-
-  parse_connection_definitions(&mut wires, &mut gates, file_contents.split("\n").collect());
+  // part one
+  {
+    let file_path = "inputs/07_input.txt";
+    let file_contents = fs::read_to_string(file_path).expect("Should read file");
   
-  let mut iteration = 0;
-  let mut a_copy = wires.get("a").copied();
-  while !a_copy.unwrap().active {
-    iterate_sim(&mut wires, &gates);
-    a_copy = wires.get("a").copied();
-    iteration += 1;
+    let mut wires: HashMap<String, Wire> = HashMap::new();
+    let mut gates: Vec<Gate> = Vec::new();
+  
+    parse_connection_definitions(&mut wires, &mut gates, file_contents.split("\n").collect());
+    
+    let mut iteration = 0;
+    let mut a_copy = wires.get("a").copied();
+    while !a_copy.unwrap().active {
+      iterate_sim(&mut wires, &gates);
+      a_copy = wires.get("a").copied();
+      iteration += 1;
+    }
+  
+    println!("Value at wire a at the end of the simulation in part 1: {}", a_copy.unwrap().value);
   }
 
-  println!("Value at wire a at the end of the simulation: {}", a_copy.unwrap().value);
+  // resetting the simulation for part two
+  {
+    let file_path = "inputs/07_input_part_2.txt";
+    let file_contents = fs::read_to_string(file_path).expect("Should read file");
+  
+    let mut wires: HashMap<String, Wire> = HashMap::new();
+    let mut gates: Vec<Gate> = Vec::new();
+  
+    parse_connection_definitions(&mut wires, &mut gates, file_contents.split("\n").collect());
+    
+    let mut iteration = 0;
+    let mut a_copy = wires.get("a").copied();
+    while !a_copy.unwrap().active {
+      iterate_sim(&mut wires, &gates);
+      a_copy = wires.get("a").copied();
+      iteration += 1;
+    }
+  
+    println!("Value at wire a at the end of the simulation in part 2: {}", a_copy.unwrap().value);
+  }
 }
