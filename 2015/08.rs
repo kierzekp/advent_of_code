@@ -14,6 +14,17 @@ fn unescape_string(string: &str) -> String {
   return find_and_replace_escaped_characters(&output_string);
 }
 
+fn reencode_string(string: &str) -> String {
+  let mut reencoded_string = String::from(string);
+  reencoded_string = reencoded_string.replace("\\", "\\\\");
+  reencoded_string = reencoded_string.replace("\"", "\\\"");
+  return String::from("\"") + &reencoded_string + &String::from("\"");
+}
+
+fn get_reencoded_length(string: &str) -> usize {
+  return reencode_string(string).len();
+}
+
 // I'm not writing an unescaping library; I do not care about the factual representation of what the escaped characters stand for
 fn find_and_replace_escaped_characters(string: &str) -> String {
   let escaped_string = String::from(string);
@@ -50,11 +61,14 @@ fn main() {
 
   let mut char_count = 0;
   let mut encoding_count = 0;
+  let mut reencoded_count = 0;
   
   for string in file_contents.split("\n") {
     char_count += get_character_length(string);
     encoding_count += get_unescaped_length(string);
+    reencoded_count += get_reencoded_length(string);
   }
 
   println!("The difference between the number of characters of code and number of characters in encoding is {} - {} = {}", char_count, encoding_count, char_count - encoding_count);
+  println!("The difference between the number of characters of code in reencoded strings and number of characters in original strings is {} - {} = {}", reencoded_count, char_count, reencoded_count - char_count);
 }
