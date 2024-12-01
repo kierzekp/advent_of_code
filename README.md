@@ -7,3 +7,9 @@ Solutions for puzzles from [Advent of Code 2015](https://adventofcode.com/2015) 
 #### Notes:
 - Solution for 04 does not include the implementation of the actual md5 hashing function. Faced with that particular task, I had basically three possible options to consider: writing my own implementation of MD5 algorithm based on the reference, importing an [existing crate which implements MD5 hashing](https://crates.io/crates/md5), or using existing code from another source. I considered writing my own implementation, however to be honest, I do not consider my level of Rust knowledge to be anywhere near allowing me to write complex bitwise operations. Importing a crate I ended up not doing since I want to keep the implementations as light as possible and do not want to use Cargo. Therefore I ended up using the existing implementation from Rosetta Stone for that particular task. Due to licensing issues, the module including that function is not included in this repository. The function verbatim as used can be found [here](https://rosettacode.org/wiki/MD5/Implementation#Rust).
 - Solution for 07 *works*, but definitely can be improved with some code refactoring and not [cheesing](https://www.urbandictionary.com/define.php?term=cheese&defid=rm=cheese&defid=5783360) the second part of the task by inputting a prepared input file.
+
+## 2016
+Solutions for puzzles from [Advent of Code 2016](https://adventofcode.com/2016) are presented in [Java](https://www.java.com/en/).
+
+## 2024
+Solutions for puzzles from [Advent of Code 2024](https://adventofcode.com/2024) are presented in Python (for now?).
